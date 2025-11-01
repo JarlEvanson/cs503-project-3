@@ -1,0 +1,7 @@
+# Ignore fuzzing temporary directory
+fuzz/tmp
+
+# Ignore build artifacts
+*.o
+*.hi
+project
