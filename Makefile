@@ -1,5 +1,5 @@
 CFLAGS := -Wall -Wextra --std=c11 -g -I include -c
-OBJECTS := lexer.o s8.o
+OBJECTS := ast.o lexer.o parser.o s8.o
 
 .PHONY: build-interpreter build-test build-fuzz
 build-lisp: build/interpreter
