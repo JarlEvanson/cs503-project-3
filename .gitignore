@@ -4,4 +4,8 @@ fuzz/tmp
 # Ignore build artifacts
 *.o
 *.hi
-project
+blackjack
+test-runner
+
+# Ignore test artifacts
+tests/*.output

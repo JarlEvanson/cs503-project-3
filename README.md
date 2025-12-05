@@ -2,73 +2,54 @@
 
 ## Project Description
 
-The project provides an implementation of an interpreter for a custom language.
+The project provides an implementation of Blackjack in Haskell.
+
+This implementations implements the following features:
+- Betting
+- Unlimited Hands
+- Insurance Bets
+- Doubling Down
 
 ## Organization
 
-The code is organized into a source directory (`src/`) and a header directory
-(`include/`). Each component or activity required by the interpreter is located
-in its own set of a `c` source file and a `c` header file and have the same
-names.
+The code is organized into a single directory (`src`). `main.hs` exists to
+stub out the code and enable use of all other code for testing in a simple
+manner. `cards.hs` provides the definition of cards and various functions
+for generating, manipulating, and summing cards and hands. `util.hs` provides
+some useful utility functions that were not directly relevant to program
+execution. `gameplay.hs` contains all of the code that directs the course
+of gameplay, deals with extracting random cards, prompting players, and
+calculating bets.
 
-For instance, `src/parse.c` and `include/parse.h` contain the implementation
-of the parsing module and its provided API.
-
-The entry point of the unit testing and integration testing programs are
-located in `src/test.c`, while the entry point of the fuzzing programs are
-located in `src/fuzz.c`.
-
-The `fuzz/` directory contains the initial seeds for a fuzzing run, and will
-contain a temporary directory when fuzzing.
-
-The `test/` directory contains various assets used for integration testing of
-the `lisp` program.
-
-The `submissions/` directory will contain assets related to the submission of
-various sprints.
-
-The `build/` directory will contain the object files and linked programs
-produced by the build process.
+All test files are located in `tests` and provide various integration tests
+that contain input to a run of the program and their expected results. The
+test-runner simply compares the expected results of a run with the actual results
+to detect success or failure.
 
 ## Build Process
 
 ### Prerequisites
 
-In order to build the interpreter, the following programs must be installed:
-`GNU make` and `gcc`.
-
-The prerequisites to build the unit testing and integration testing programs
-are identical to the ones required to build the interpreter.
-
-In order to fuzz the interpreter, the following additional programs must be
-installed:
-`afl++` and `tmux`.
+In order to build the implementation of Blackjack, the following program must
+be installed: `ghc`.
 
 ### Building
 
-To build the interpreter, run:
+All build commands should be done with the current directory being the base of
+this project.
+
+To build the implementation of Blackjack, run:
 ```bash
-make
+ghc -o blackjack src/main.hs src/cards.hs src/util.hs src/gameplay.hs
 ```
 
-To build the unit testing and integration testing programs, run:
+To build the test runner, run:
 ```bash
-make build-test
+ghc -o test-runner src/test-runner.hs src/cards.hs src/util.hs src/gameplay.hs
 ```
 
-To build the fuzzing programs, run:
-```bash
-make build-fuzz
-```
+### Running and Testing
 
-## Testing
-
-To run the unit and integration tests, run:
-```bash
-make test
-```
-
-To fuzz the interpreter, run:
-```bash
-make fuzz
-```
+The program can be run by running the produced executable starting with the name
+`blackjack` while the test runner can be run using the produced executable with
+the name `test-runner`.
